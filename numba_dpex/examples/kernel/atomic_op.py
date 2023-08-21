@@ -24,7 +24,6 @@ def main():
     # We are storing sum to the first element
     a = np.arange(0, N)
     res = np.zeros(1, dtype=a.dtype)
-
     print("Using device ...")
     print(a.device)
 
