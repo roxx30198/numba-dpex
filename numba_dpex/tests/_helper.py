@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: 2020 - 2023 Intel Corporation
 #
 # SPDX-License-Identifier: Apache-2.0
+# Test comment
 
 import contextlib
 import shutil
