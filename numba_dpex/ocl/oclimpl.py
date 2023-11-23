@@ -105,8 +105,12 @@ def barrier_one_arg_impl(context, builder, sig, args):
     barrier = _declare_function(
         context, builder, "barrier", sig, ["unsigned int"]
     )
-    barrier.attributes.add("noduplicate")
-    builder.call(barrier, [flags])
+
+    barrier.attributes.add("convergent")
+    callbuild = builder.call(barrier, [flags])
+    callbuild.attributes.add("convergent")
+    callbuild.attributes.add("nounwind")
+
     return _void_value
 
 
@@ -117,9 +121,12 @@ def barrier_no_arg_impl(context, builder, sig, args):
     barrier = _declare_function(
         context, builder, "barrier", sig, ["unsigned int"]
     )
-    barrier.attributes.add("noduplicate")
     flags = context.get_constant(types.uint32, stubs.GLOBAL_MEM_FENCE)
-    builder.call(barrier, [flags])
+    barrier.attributes.add("convergent")
+    callbuild = builder.call(barrier, [flags])
+    callbuild.attributes.add("convergent")
+    callbuild.attributes.add("nounwind")
+
     return _void_value
 
 
@@ -140,9 +147,12 @@ def sub_group_barrier_impl(context, builder, sig, args):
     barrier = _declare_function(
         context, builder, "barrier", sig, ["unsigned int"]
     )
-    barrier.attributes.add("noduplicate")
     flags = context.get_constant(types.uint32, stubs.LOCAL_MEM_FENCE)
-    builder.call(barrier, [flags])
+    barrier.attributes.add("convergent")
+    callbuild = builder.call(barrier, [flags])
+    callbuild.attributes.add("convergent")
+    callbuild.attributes.add("nounwind")
+
     return _void_value
 
 
